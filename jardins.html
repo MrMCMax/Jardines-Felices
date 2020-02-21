@@ -228,7 +228,7 @@ function getNormalDate(dia, mes, anyo) {
 }
 
 function calcularIndice(so2, co, pm) {
-    var media = (co * 100 / maxCO) + (so2 * 100 / maxSO2) + (pm * 100 / maxPM10);
+    var media = (co / maxCO) + (so2 / maxSO2) + (pm / maxPM10);
     media = media / 3;
     return media;
 }
@@ -266,10 +266,10 @@ slider.addEventListener('change', function() {
     console.log("fila: " + fila);
     var vector = fila.split(";");
     
-    statistics[1].innerHTML = "SO<sub>2</sub>: " + vector[2]
-    statistics[2].innerHTML = "CO: " + vector[3]
-    statistics[3].innerHTML = "PM<sub>10</sub>: " + vector[6]
-    statistics[4].innerHTML = "Indice de calidad del aire: " + calcularIndice(vector[2], vector[3], vector[6])
+    statistics[1].innerHTML = "SO<sub>2</sub>: " + vector[2] + "μg/m<sup>3</sup>"
+    statistics[2].innerHTML = "CO: " + vector[3] + "μg/m<sup>3</sup>"
+    statistics[3].innerHTML = "PM<sub>10</sub>: " + vector[6] + "μg/m<sup>3</sup>"
+    statistics[4].innerHTML = "Indice de calidad del aire: " + calcularIndice(vector[2], vector[3], vector[6]) + "%"
     
 });
 
