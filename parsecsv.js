@@ -1,5 +1,4 @@
 //SO2, CO, PM10
-//http://mapas.valencia.es/WebsMunicipales/uploads/atmosferica/1A.csv
 var fs = require("fs")
 var csv = require('csv-parser')
 
@@ -48,24 +47,35 @@ function addDia(row) {
 }
 
 var dias = []
+
+function getNormalDate(dia, mes, anyo) {
+    if (dia <= 9) {
+        dia = "0" + dia;
+    }
+    if (mes <= 9) {
+        mes = "0" + mes;
+    }
+    return dia + "/" + mes + "/" + anyo;
+}
 //Funciones para obtener informacion de dias
-function getCOfromDay(ddmmaaaa) {
-    return dias[ddmmaaaa].co;
+function getCOfromDay(dia, mes, anyo) {
+    
+    return dias[getNormalDate(dia, mes, anyo)].co;
 }
 
-function getSO2fromDay(ddmmaaaa) {
-    return dias[ddmmaaaa].so2;
+function getSO2fromDay(dia, mes, anyo) {
+    return dias[getNormalDate(dia, mes, anyo)].so2;
 }
 
-function getPM10fromDay(ddmmaaaa) {
-    return dias[ddmmaaaa].PM10;
+function getPM10fromDay(dia, mes, anyo) {
+    return dias[getNormalDate(dia, mes, anyo)].PM10;
 }
-function getIndicefromDay(ddmmaaaa) {
-    return dias[ddmmaaaa].indice;
+function getIndicefromDay(dia, mes, anyo) {
+    return dias[getNormalDate(dia, mes, anyo)].indice;
 }
 
 //Leer archivo
-fs.createReadStream('./1A.csv')
+fs.createReadStream('./3A.csv')
   .pipe(csv())
   .on('data', (row) => {
     addDia(row);
