@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="./icon64x64.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Krona+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+*, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #80e27e;
+}
+
+nav {
+    background-color: #087f23;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    height: 80px;
+}
+
+nav .logo {
+    padding: 8px;
+    display: flex;
+    align-self: center;
+}
+
+nav .logo div {
+    font-size: 32px;
+    font-family: 'Krona One', sans-serif;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+nav .navbar {
+    padding: 8px;
+    display: flex;
+    align-self: center;
+    width: 800px;
+}
+
+nav .navbar ul {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav .navbar ul li a {
+    font-size: 16px;
+    font-family: 'Krona One', sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    padding: 32px;
+}
+
+.container .slider {
+    width: 25%;
+    height: 100%;
+    margin: 8px;
+}
+
+.slider .barra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slider .barra input {
+    -webkit-appearance: none;
+    height: 400px;
+    width: 16px;
+    background: #ffffff;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 4px;
+}
+
+.slider .barra input:hover {
+    opacity: 1;
+}
+
+.slider .barra input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 32px;
+    height: 32px;
+    background: url('./tree32x32.png');
+    cursor: pointer;
+}
+
+.slider .barra input::-moz-range-thumb {
+    width: 32px;
+    height: 32px;
+    background: url('./tree32x32.png');
+    cursor: pointer;
+}
+
+.slider .manual {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-family: 'Nunito', sans-serif;
+}
+
+.slider .manual input {
+    width: 48px;
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
+
+.container .statistics {
+    width: 20%;
+    height: 100%;
+    margin: 8px;
+}
+
+.statistics ul {
+    list-style: none;
+}
+
+.statistics ul li {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+}
+
+.title {
+    font-weight: bold;
+}
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="./icon64x64w.png" width="64" height="64">
+            <div>Jardins</div>
+        </div>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Quién somos</a></li>
+                <li><a href="#">Concurso</a></li>
+                <li><a href="#">Inscribirse</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="slider">
+
+            <div class="barra">
+                <form>
+                    <input type="range" min="0" max="100" orient="vertical" id="slider"/>
+                </form>
+            </div>
+
+            <div class="manual">
+
+                <form>
+                    <input type="text" placeholder="dd"/>/
+                    <input type="text" placeholder="mm"/>/
+                    <input type="text" placeholder="yy"/>
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d197293.72284734255!2d-0.501598656242018!3d39.40796653717781!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f4cf0efb06f%3A0xb4a351011f7f1d39!2sValencia!5e0!3m2!1ses!2ses!4v1582296199689!5m2!1ses!2ses" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+
+        <div class="statistics">
+            <ul>
+                <li><span class="title">Barrio</span></li>
+                <li>CO:</li>
+                <li>SO<sub>2</sub>:</li>
+                <li>PM<sub>10</sub>:</li>
+                <li>Índice de calidad del aire:</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+
+var slider = document.getElementById("slider");
+var dateshow = document.getElementsByClassName('manual')[0].firstElementChild;
+
+var olddate = new Date("01/02/2014"); 
+var nowdate = new Date(); 
+  
+// To calculate the time difference of two dates 
+var Difference_In_Time = nowdate.getTime() - olddate.getTime(); 
+  
+// To calculate the no. of days between two dates 
+var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+slider.addEventListener('change', function() {
+
+    let tiemposeleccionado = (Difference_In_Time / 100) * slider.value;
+
+    let d = new Date(tiemposeleccionado + olddate.getTime());
+
+    dateshow[0].value = d.getDate() + "";
+    dateshow[1].value = d.getMonth() + 1 + "";
+    dateshow[2].value = d.getYear() + 1900 + "";
+});
+
+function updateDate() {
+    let tiemposeleccionado = (Difference_In_Time / 100) * slider.value;
+
+    let d = new Date(tiemposeleccionado + olddate.getTime());
+
+    dateshow[0].value = d.getDate() + "";
+    dateshow[1].value = d.getMonth() + 1 + "";
+    dateshow[2].value = d.getYear() + 1900 + "";
+}
+
+updateDate();
+    </script>
+</body>
+
+</html>
