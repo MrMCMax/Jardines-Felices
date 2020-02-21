@@ -1,4 +1,5 @@
 //SO2, CO, PM10
+//http://mapas.valencia.es/WebsMunicipales/uploads/atmosferica/1A.csv
 var fs = require("fs")
 var csv = require('csv-parser')
 
@@ -64,7 +65,7 @@ function getIndicefromDay(ddmmaaaa) {
 }
 
 //Leer archivo
-fs.createReadStream('./3A.csv')
+fs.createReadStream('./1A.csv')
   .pipe(csv())
   .on('data', (row) => {
     addDia(row);
